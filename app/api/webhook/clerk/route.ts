@@ -17,6 +17,7 @@ import {
   removeUserFromCommunity,
   updateCommunityInfo,
 } from "@/lib/actions/community.actions";
+import { WebhookEvent } from "@clerk/nextjs/server";
 
 // Resource: https://clerk.com/docs/integration/webhooks#supported-events
 // Above document lists the supported events
@@ -48,33 +49,31 @@ export const POST = async (request: Request) => {
   // After adding the endpoint, you'll see the secret on the right side.
   const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
 
-  let evnt: Event | null = null;
+  let evnt: WebhookEvent;
 
   try {
     evnt = wh.verify(
       JSON.stringify(payload),
       heads as IncomingHttpHeaders & WebhookRequiredHeaders
-    ) as Event;
+    ) as WebhookEvent;
   } catch (err) {
     return NextResponse.json({ message: err }, { status: 400 });
   }
 
-  const eventType: EventType = evnt?.type!;
+  const eventType = evnt.type;
 
   // Listen organization creation event
   if (eventType === "organization.created") {
     // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/CreateOrganization
     // Show what evnt?.data sends from above resource
-    const { id, name, slug, logo_url, image_url, created_by } =
-      evnt?.data ?? {};
+    const { id, name, slug, image_url, created_by } = evnt.data;
 
     try {
       await createCommunity(
-        // @ts-expect-error id is string
         id,
         name,
         slug,
-        logo_url || image_url,
+        image_url || "",
         "org bio",
         created_by
       );
@@ -119,7 +118,6 @@ export const POST = async (request: Request) => {
       const { organization, public_user_data } = evnt?.data;
       console.log("created", evnt?.data);
 
-      // @ts-expect-error id is string
       await addMemberToCommunity(organization.id, public_user_data.user_id);
 
       return NextResponse.json(
@@ -144,7 +142,6 @@ export const POST = async (request: Request) => {
       const { organization, public_user_data } = evnt?.data;
       console.log("removed", evnt?.data);
 
-      // @ts-expect-error id is string
       await removeUserFromCommunity(public_user_data.user_id, organization.id);
 
       return NextResponse.json({ message: "Member removed" }, { status: 201 });
@@ -163,11 +160,10 @@ export const POST = async (request: Request) => {
     try {
       // Resource: https://clerk.com/docs/reference/backend-api/tag/Organizations#operation/UpdateOrganization
       // Show what evnt?.data sends from above resource
-      const { id, logo_url, name, slug } = evnt?.data;
+      const { id, name, slug, image_url } = evnt?.data;
       console.log("updated", evnt?.data);
 
-      // @ts-expect-error id is string
-      await updateCommunityInfo(id, name, slug, logo_url);
+      await updateCommunityInfo(id, name, slug, image_url || "");
 
       return NextResponse.json({ message: "Member removed" }, { status: 201 });
     } catch (err) {
