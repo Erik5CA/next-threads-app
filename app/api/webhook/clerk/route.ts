@@ -70,7 +70,7 @@ export const POST = async (request: Request) => {
 
     try {
       await createCommunity(
-        // @ts-expect-error
+        // @ts-expect-error id is string
         id,
         name,
         slug,
@@ -119,7 +119,7 @@ export const POST = async (request: Request) => {
       const { organization, public_user_data } = evnt?.data;
       console.log("created", evnt?.data);
 
-      // @ts-expect-error
+      // @ts-expect-error id is string
       await addMemberToCommunity(organization.id, public_user_data.user_id);
 
       return NextResponse.json(
@@ -144,7 +144,7 @@ export const POST = async (request: Request) => {
       const { organization, public_user_data } = evnt?.data;
       console.log("removed", evnt?.data);
 
-      // @ts-expect-error
+      // @ts-expect-error id is string
       await removeUserFromCommunity(public_user_data.user_id, organization.id);
 
       return NextResponse.json({ message: "Member removed" }, { status: 201 });
@@ -166,7 +166,7 @@ export const POST = async (request: Request) => {
       const { id, logo_url, name, slug } = evnt?.data;
       console.log("updated", evnt?.data);
 
-      // @ts-expect-error
+      // @ts-expect-error id is string
       await updateCommunityInfo(id, name, slug, logo_url);
 
       return NextResponse.json({ message: "Member removed" }, { status: 201 });
@@ -188,7 +188,7 @@ export const POST = async (request: Request) => {
       const { id } = evnt?.data;
       console.log("deleted", evnt?.data);
 
-      // @ts-expect-error
+      // @ts-expect-error id is string
       await deleteCommunity(id);
 
       return NextResponse.json(

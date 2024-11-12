@@ -9,7 +9,7 @@ type Props = {
 };
 
 const ThreadsTab = async ({ currentId, accountId, accountType }: Props) => {
-  let result = await fetchUserPosts(accountId);
+  const result = await fetchUserPosts(accountId);
 
   if (!result) redirect("/");
   return (
