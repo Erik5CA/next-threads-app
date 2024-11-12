@@ -196,7 +196,11 @@
 
 /* Tab */
 .tab {
-  @apply flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
+  @apply flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-primary-500 !important;
+}
+
+.tab-icon {
+  @apply data-[state=active]:bg-primary-500 !important;
 }
 
 .no-focus {

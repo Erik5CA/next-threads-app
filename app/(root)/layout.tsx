@@ -21,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
+      dynamic
       appearance={{
         baseTheme: dark,
       }}

@@ -1,4 +1,9 @@
-import { OrganizationSwitcher, SignedIn, SignOutButton } from "@clerk/nextjs";
+import {
+  OrganizationSwitcher,
+  SignedIn,
+  SignOutButton,
+  SignedOut,
+} from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -25,6 +30,17 @@ const TopBar = () => {
             </SignOutButton>
           </SignedIn>
         </div>
+
+        <SignedOut>
+          <div>
+            <Link
+              href="/sign-in"
+              className="bg-primary-500 px-2 py-1 rounded-md text-light-1 hover:bg-primary-500/80"
+            >
+              Sign In
+            </Link>
+          </div>
+        </SignedOut>
 
         <OrganizationSwitcher
           appearance={{

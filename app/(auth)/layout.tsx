@@ -14,12 +14,17 @@ const inter = Inter({ subsets: ["latin"] });
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <ClerkProvider
+      dynamic
       appearance={{
         baseTheme: dark,
       }}
     >
       <html lang="es">
-        <body className={`${inter.className} bg-dark-1`}>{children}</body>
+        <body className={`${inter.className} bg-dark-1`}>
+          <div className="w-full flex justify-center items-center min-h-screen">
+            {children}
+          </div>
+        </body>
       </html>
     </ClerkProvider>
   );
