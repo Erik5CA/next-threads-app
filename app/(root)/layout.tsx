@@ -27,9 +27,11 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${inter.className} antialiased`}>
+        <body
+          className={`${inter.className} antialiased custom-scrollbar-main`}
+        >
           <TopBar />
-          <main className="flex flex-row">
+          <main className="flex flex-row custom-scrollbar-main">
             <LeftSideBar />
             <section className="main-container">
               <div className="w-full max-w-4xl">{children}</div>

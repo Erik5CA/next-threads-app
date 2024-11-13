@@ -1,3 +1,4 @@
+import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,7 +40,7 @@ const ThreadCard = ({
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
-        isComment ? "px-0 xs:px-7" : "bg-dark-2 p-7"
+        isComment ? "px-0 xs:px-7" : "bg-dark-3 p-7"
       }`}
     >
       <div className="flex items-start justify-between">
@@ -110,6 +111,60 @@ const ThreadCard = ({
           </div>
         </div>
       </div>
+
+      {!isComment && comments.length > 0 && (
+        <div className="flex items-center mt-3">
+          {comments.map((comment, index) => (
+            <div
+              key={index}
+              className={`${index !== 0 && "-ml-4"} relative w-7 h-7`}
+            >
+              <Image
+                // key={index}
+                src={comment.author.image}
+                alt={`user_${index}`}
+                // width={28}
+                // height={28}
+                fill
+                className={`rounded-full object-cover`}
+              />
+            </div>
+          ))}
+          {comments.length > 3 && (
+            <p className="ml-1 text-subtle-medium text-gray-1">
+              {comments.length}+ Replies
+            </p>
+          )}
+        </div>
+      )}
+
+      {!isComment && (
+        <div className="text-subtle-medium text-gray-1 mt-5 flex items-center gap-1">
+          <p>{formatDateString(createdAt)}</p>
+          {community && community.image && (
+            <div className="flex gap-2 items-center">
+              <Link href={`/communities/${community.id}`}>
+                <p>
+                  {" - "}{" "}
+                  <span className="hover:text-primary-500 hover:underline">
+                    {community.name} Community
+                  </span>
+                </p>
+              </Link>
+              <div className="relative h-4 w-4">
+                <Image
+                  src={community.image}
+                  alt={community.name}
+                  // width={14}
+                  // height={14}
+                  fill
+                  className="rounded-full object-cover"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </article>
   );
 };

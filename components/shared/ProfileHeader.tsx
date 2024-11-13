@@ -1,4 +1,6 @@
+import { EditIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   accountId: string;
@@ -7,6 +9,7 @@ type Props = {
   username: string;
   imgUrl: string;
   bio: string;
+  type?: "User" | "Community";
 };
 
 const ProfileHeader = ({
@@ -37,6 +40,12 @@ const ProfileHeader = ({
             <p className="text-base-medium text-gray-1">@{username}</p>
           </div>
         </div>
+
+        {accountId === authUserId && (
+          <Link href="/edit-profile">
+            <EditIcon className="text-primary-500" />
+          </Link>
+        )}
 
         {/* TODO: Community */}
       </div>

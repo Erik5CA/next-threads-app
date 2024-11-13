@@ -4,6 +4,7 @@ import {
   SignOutButton,
   SignedOut,
 } from "@clerk/nextjs";
+import { LogInIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -35,9 +36,10 @@ const TopBar = () => {
           <div>
             <Link
               href="/sign-in"
-              className="bg-primary-500 px-2 py-1 rounded-md text-light-1 hover:bg-primary-500/80"
+              className="bg-primary-500 px-2 py-1 rounded-md text-[12px] text-light-1 hover:bg-primary-500/80 flex gap-2 items-center"
             >
               Sign In
+              <LogInIcon className="w-4 h-4" />
             </Link>
           </div>
         </SignedOut>

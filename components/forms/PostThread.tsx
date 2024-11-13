@@ -16,7 +16,8 @@ import { Button } from "../ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { LoaderCircle } from "lucide-react";
 import { ThreadValidation, ThreadSchema } from "@/lib/validations/thread";
-import { createNewThread } from "@/lib/actions/thread.action";
+import { createThread } from "@/lib/actions/thread.action";
+import { useOrganization } from "@clerk/nextjs";
 
 type Props = {
   userId: string;
@@ -25,6 +26,7 @@ type Props = {
 const PostThread = ({ userId }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { organization } = useOrganization();
 
   const form = useForm<ThreadSchema>({
     resolver: zodResolver(ThreadValidation),
@@ -35,10 +37,10 @@ const PostThread = ({ userId }: Props) => {
   });
 
   const onSubmit = async (data: ThreadSchema) => {
-    await createNewThread({
+    await createThread({
       text: data.thread,
       author: userId,
-      communityId: null,
+      communityId: organization ? organization.id : null,
       path: pathname,
     });
 
