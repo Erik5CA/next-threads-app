@@ -17,7 +17,7 @@ const RightSideBar = async () => {
     userId: user?.id || "",
     searchString: "",
     pageNumber: 1,
-    pageSize: 25,
+    pageSize: 5,
   });
 
   return (

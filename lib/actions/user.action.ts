@@ -100,7 +100,7 @@ export async function fetchUsers({
   searchString = "",
   pageNumber = 1,
   pageSize = 20,
-  sortBy = "desc",
+  sortBy = "asc",
 }: {
   userId: string;
   searchString?: string;
@@ -146,7 +146,7 @@ export async function fetchUsers({
     // Check if there are more users beyond the current page.
     const isNext = totalUsersCount > skipAmount + users.length;
 
-    return { users, isNext };
+    return { users: users, isNext };
   } catch (error) {
     console.error("Error fetching users:", error);
     throw error;
