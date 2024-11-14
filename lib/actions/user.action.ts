@@ -181,3 +181,26 @@ export async function getActivity(userId: string) {
     throw error;
   }
 }
+
+export async function getUserReplies(userId: string) {
+  try {
+    connectToDB();
+
+    // find all threads created by the user where the parentId field is not null
+
+    const userThreads = await Thread.find({
+      parentId: { $ne: null },
+      author: userId,
+    })
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "author",
+        model: User,
+        select: "name image _id",
+      });
+    return userThreads;
+  } catch (error) {
+    console.error("Error fetching user replies: ", error);
+    throw error;
+  }
+}

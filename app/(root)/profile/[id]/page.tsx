@@ -1,4 +1,5 @@
 import ProfileHeader from "@/components/shared/ProfileHeader";
+import RepliesTab from "@/components/shared/RepliesTab";
 import ThreadsTab from "@/components/shared/ThreadsTab";
 import { TabsList, Tabs, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
@@ -18,6 +19,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if (!userInfo) return null;
 
   if (!userInfo.onboarded) redirect("/onboarding");
+
   return (
     <section>
       <ProfileHeader
@@ -51,19 +53,19 @@ const Page = async ({ params }: { params: { id: string } }) => {
               </TabsTrigger>
             ))}
           </TabsList>
-          {profileTabs.map((tab) => (
-            <TabsContent
-              key={`content-${tab.label}`}
-              value={tab.value}
-              className="w-full text-light-1"
-            >
-              <ThreadsTab
-                currentId={user.id}
-                accountId={userInfo.id}
-                accountType="User"
-              />
-            </TabsContent>
-          ))}
+          <TabsContent value="threads" className="w-full text-light-1">
+            <ThreadsTab
+              currentId={user.id}
+              accountId={userInfo.id}
+              accountType="User"
+            />
+          </TabsContent>
+          <TabsContent value="replies" className="w-full text-light-1">
+            <RepliesTab currentId={user.id} accountId={userInfo._id} />
+          </TabsContent>
+          <TabsContent value="tagged" className="w-full text-light-1">
+            <p className="text-white">Tagged</p>
+          </TabsContent>
         </Tabs>
       </div>
     </section>
