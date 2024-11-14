@@ -22,13 +22,16 @@ const Page = async () => {
             {activity.map((act) => (
               <Link key={act._id} href={`/thread/${act.parentId}`}>
                 <article className="activity-card">
-                  <Image
-                    src={act.author.image}
-                    alt="profile image"
-                    width={20}
-                    height={20}
-                    className="rounded-full object-cover"
-                  />
+                  <div className="relative w-5 h-5">
+                    <Image
+                      src={act.author.image}
+                      alt="profile image"
+                      // width={20}
+                      // height={20}
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                  </div>
 
                   <p className="!text-small-regular text-light-1">
                     <span className="mr-1 text-primary-500">
