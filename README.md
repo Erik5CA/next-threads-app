@@ -32,16 +32,16 @@ Uploading files is done using Uploadthing.
 ## Screenshots
 
 - Home page
-  ![Screenshot](https://github.com/Erik-Castillo/next-threads-app/blob/main/public/home.jpeg)
+  ![Screenshot](https://raw.githubusercontent.com/Erik5CA/next-threads-app/refs/heads/main/public/screenshots/home.jpeg)
 
 - User profile
-  ![Screenshot](https://github.com/Erik-Castillo/next-threads-app/blob/main/public/profile.jpeg)
+  ![Screenshot](https://raw.githubusercontent.com/Erik5CA/next-threads-app/refs/heads/main/public/screenshots/profile.jpeg)
 
 - Search
-  ![Screenshot](https://github.com/Erik-Castillo/next-threads-app/blob/main/public/search-user.jpeg)
+  ![Screenshot](https://raw.githubusercontent.com/Erik5CA/next-threads-app/refs/heads/main/public/screenshots/search-user.jpeg)
 
 - Community page
-  ![Screenshot](https://github.com/Erik-Castillo/next-threads-app/blob/main/public/community.jpeg)
+  ![Screenshot](https://raw.githubusercontent.com/Erik5CA/next-threads-app/refs/heads/main/public/screenshots/community.jpeg)
 
 ## Contributing
 
