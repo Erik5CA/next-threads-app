@@ -6,17 +6,17 @@ import { profileTabs } from "@/constants";
 import { fetchUser } from "@/lib/actions/user.action";
 import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
   const user = await currentUser();
 
-  if (!user) return null;
+  // if (!user) redirect("/sign-in");
 
   const userInfo = await fetchUser(id);
 
-  if (!userInfo) return null;
+  if (!userInfo) notFound();
 
   if (!userInfo.onboarded) redirect("/onboarding");
 
@@ -24,7 +24,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
     <section>
       <ProfileHeader
         accountId={userInfo.id}
-        authUserId={user.id}
+        authUserId={user?.id}
         name={userInfo.name}
         username={userInfo.username}
         imgUrl={userInfo.image}
@@ -55,13 +55,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
           </TabsList>
           <TabsContent value="threads" className="w-full text-light-1">
             <ThreadsTab
-              currentId={user.id}
+              currentId={user?.id}
               accountId={userInfo.id}
               accountType="User"
             />
           </TabsContent>
           <TabsContent value="replies" className="w-full text-light-1">
-            <RepliesTab currentId={user.id} accountId={userInfo._id} />
+            <RepliesTab currentId={user?.id} accountId={userInfo._id} />
           </TabsContent>
           <TabsContent value="tagged" className="w-full text-light-1">
             <p className="text-white">Tagged</p>

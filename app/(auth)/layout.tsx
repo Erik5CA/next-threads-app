@@ -19,13 +19,13 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         baseTheme: dark,
       }}
     >
-      <html lang="es">
-        <body className={`${inter.className} bg-dark-1`}>
-          <div className="w-full flex justify-center items-center min-h-screen">
-            {children}
-          </div>
-        </body>
-      </html>
+      {/* <html lang="es"> */}
+      {/* <body className={`${inter.className} bg-dark-1`}> */}
+      <div className="w-full flex justify-center items-center min-h-screen">
+        {children}
+      </div>
+      {/* </body> */}
+      {/* </html> */}
     </ClerkProvider>
   );
 };

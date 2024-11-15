@@ -4,7 +4,7 @@ import ThreadCard from "../cards/ThreadCard";
 import { fetchCommunityPosts } from "@/lib/actions/community.actions";
 
 type Props = {
-  currentId: string;
+  currentId: string | undefined;
   accountId: string;
   accountType: string;
 };

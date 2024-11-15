@@ -4,7 +4,7 @@ import Link from "next/link";
 
 type Props = {
   accountId: string;
-  authUserId: string;
+  authUserId?: string | null;
   name: string;
   username: string;
   imgUrl: string;
@@ -41,7 +41,7 @@ const ProfileHeader = ({
           </div>
         </div>
 
-        {accountId === authUserId && (
+        {authUserId && accountId === authUserId && (
           <Link href="/edit-profile">
             <EditIcon className="text-primary-500" />
           </Link>

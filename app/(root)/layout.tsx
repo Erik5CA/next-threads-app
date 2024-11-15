@@ -26,21 +26,15 @@ export default function RootLayout({
         baseTheme: dark,
       }}
     >
-      <html lang="en">
-        <body
-          className={`${inter.className} antialiased custom-scrollbar-main`}
-        >
-          <TopBar />
-          <main className="flex flex-row custom-scrollbar-main">
-            <LeftSideBar />
-            <section className="main-container">
-              <div className="w-full max-w-4xl">{children}</div>
-            </section>
-            <RightSideBar />
-          </main>
-          <BottomBar />
-        </body>
-      </html>
+      <TopBar />
+      <main className="flex flex-row custom-scrollbar-main">
+        <LeftSideBar />
+        <section className="main-container">
+          <div className="w-full max-w-4xl">{children}</div>
+        </section>
+        <RightSideBar />
+      </main>
+      <BottomBar />
     </ClerkProvider>
   );
 }

@@ -3,7 +3,7 @@ import ThreadCard from "../cards/ThreadCard";
 import { getUserReplies } from "@/lib/actions/user.action";
 
 type Props = {
-  currentId: string;
+  currentId: string | undefined;
   accountId: string;
   accountType?: string;
 };
